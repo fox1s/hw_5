@@ -5,16 +5,19 @@ from django.urls import path
 from rest_framework.serializers import ModelSerializer
 
 from company.models import CompanyModel
+from company.serializers import CompanySerializer
 
 UserModel = get_user_model()
 
 
 class UserSerializer(ModelSerializer):
+    companies = CompanySerializer(many=True, required=True)
+
     class Meta:
         model = UserModel
-        fields = ['id', 'email', 'password', 'is_superuser', 'is_staff', 'is_active']
+        fields = ['id', 'email', 'password', 'is_superuser', 'is_staff', 'is_active', 'companies']
         extra_kwargs = {
-            'password':{'write_only':True}
+            'password': {'write_only': True}
         }
 
     def create(self, validated_data):

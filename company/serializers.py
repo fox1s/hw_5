@@ -10,5 +10,5 @@ from company.models import CompanyModel
 class CompanySerializer(ModelSerializer):
     class Meta:
         model = CompanyModel
-        fields = ['id', 'name', 'country', 'city']
-
+        # exclude = ['user']
+        fields = ['id', 'name', 'country', 'city', 'user']
